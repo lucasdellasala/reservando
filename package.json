@@ -1,0 +1,25 @@
+{
+  "name": "reservando",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "chai": "^4.2.0"
+  },
+  "devDependencies": {
+    "mocha": "^7.1.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucasdellasala/reservando.git"
+  },
+  "author": "Lucas Dellas Sala",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucasdellasala/reservando/issues"
+  },
+  "homepage": "https://github.com/lucasdellasala/reservando#readme"
+}
