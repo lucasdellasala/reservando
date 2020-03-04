@@ -9,12 +9,17 @@ var Restaurant = function(id, nombre, rubro, ubicacion, horarios, imagen, califi
 }
 
 Restaurant.prototype.reservarHorario = function(horarioReservado) {
-    for (var i = 0; i < this.horarios.length; i++) {
-        if (this.horarios[i] === horarioReservado) {
-            this.horarios.splice(i, 1);
-            return;
-        }
+    let horariosRestantes = this.horarios.filter(horario !== horarioReservado);
+    if (this.horarios[i] !== horariosRestantes[i]) {
+        this.horarios = horariosRestantes;
+        return;
     }
+    // for (var i = 0; i < this.horarios.length; i++) {
+    //     if (this.horarios[i] === horarioReservado) {
+    //         this.horarios.splice(i, 1);
+    //         return;
+    //     }
+    // }
 }
 
 Restaurant.prototype.calificar = function(nuevaCalificacion) {
