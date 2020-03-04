@@ -107,5 +107,72 @@ describe('Test de la función calificar', function() {
     });
 });
 //Buscar restaurante (id)
-
+describe('Test de la función buscarRestaurante(id)', function() {
+    it("Encuentra el restaurante con id 1", function(){
+        // Inicializar variables que contienen los metodos a testear
+        let restauranteId1 = new Restaurant(1, "TAO Uptown", "Asiática", "Nueva York", ["13:00", "15:30", "18:00"], "../img/asiatica1.jpg", [6, 7, 9, 10, 5])
+        // Ejecutar metodos que se quieren testear
+        let restauranteId1Metodo = listado.buscarRestaurante(1);
+        // Verificar que el resultado devuelto por la funcion coincida con el resultado esperado
+        expect(restauranteId1.id).to.equal(restauranteId1Metodo.id);
+        expect(restauranteId1.nombre).to.equal(restauranteId1Metodo.nombre);
+        expect(restauranteId1.rubro).to.equal(restauranteId1Metodo.rubro);
+        expect(restauranteId1.ubicacion).to.equal(restauranteId1Metodo.ubicacion);
+        expect(restauranteId1.horarios.length).to.equal(restauranteId1Metodo.horarios.length);
+        expect(restauranteId1.imagen).to.equal(restauranteId1Metodo.imagen);
+        expect(restauranteId1.calificaciones.length).to.equal(restauranteId1Metodo.calificaciones.length);
+    });
+    it("No ecuentra el restaurante con id 25", function(){
+        // Inicializar variables que contienen los metodos a testear
+        // Ejecutar metodos que se quieren testear
+        let restauranteId25Metodo = listado.buscarRestaurante(25);
+        // Verificar que el resultado devuelto por la funcion coincida con el resultado esperado
+        expect("No se ha encontrado ningún restaurant").to.equal(restauranteId25Metodo);
+    });
+    it("No ecuentra el restaurante con id vacío", function(){
+        // Inicializar variables que contienen los metodos a testear
+        // Ejecutar metodos que se quieren testear
+        let restauranteIdVacioMetodo = listado.buscarRestaurante();
+        // Verificar que el resultado devuelto por la funcion coincida con el resultado esperado
+        expect("No se ha encontrado ningún restaurant").to.equal(restauranteIdVacioMetodo);
+    });
+});
 //Obtener restaurante
+describe('Test de la función obtenerRestaurante', function() {
+    it("No obtiene un restaurant con horario 00:00", function(){
+        // Inicializar variables que contienen los metodos a testear
+        // Ejecutar metodos que se quieren testear
+        let restaurantesFiltrados = listado.obtenerRestaurantes(null,null,"00:00");
+        // Verificar que el resultado devuelto por la funcion coincida con el resultado esperado
+        expect(0).to.equal(restaurantesFiltrados.length);
+    });
+    it("No obtiene un restaurant con ciudad Bariloche", function(){
+        // Inicializar variables que contienen los metodos a testear
+        // Ejecutar metodos que se quieren testear
+        let restaurantesFiltrados = listado.obtenerRestaurantes(null,"Bariloche",null);
+        // Verificar que el resultado devuelto por la funcion coincida con el resultado esperado
+        expect(0).to.equal(restaurantesFiltrados.length);
+    });
+    it("No obtiene un restaurant con rubro Chori", function(){
+        // Inicializar variables que contienen los metodos a testear
+        // Ejecutar metodos que se quieren testear
+        let restaurantesFiltrados = listado.obtenerRestaurantes("Chori",null,null);
+        // Verificar que el resultado devuelto por la funcion coincida con el resultado esperado
+        expect(0).to.equal(restaurantesFiltrados.length);
+    });
+    it("No obtiene un restaurant con rubro y ciudad existente, pero horario 00:00", function(){
+        // Inicializar variables que contienen los metodos a testear
+        // Ejecutar metodos que se quieren testear
+        let restaurantesFiltrados = listado.obtenerRestaurantes("Asiática","Nueva York","00:00");
+        // Verificar que el resultado devuelto por la funcion coincida con el resultado esperado
+        expect(0).to.equal(restaurantesFiltrados.length);
+    });
+    it("Encuentra el restaurant TAO Uptown con Nueva York, Asiática y 13:00", function(){
+        // Inicializar variables que contienen los metodos a testear
+        // Ejecutar metodos que se quieren testear
+        let restaurantesFiltrados = listado.obtenerRestaurantes("Asiática","Nueva York","13:00");
+        // Verificar que el resultado devuelto por la funcion coincida con el resultado esperado
+        expect(1).to.equal(restaurantesFiltrados.length);
+        expect("TAO Uptown").to.equal(restaurantesFiltrados[0].nombre);
+    });    
+});
