@@ -2,6 +2,12 @@ var Listado = function(restaurantes) {
     this.restaurantes = restaurantes;
 }
 
+function filtrar(arregloSinFiltrar) {
+    arregloSinFiltrar.filter(function(elem, index, self) {
+        return index === self.indexOf(elem);
+    })
+}
+
 Listado.prototype.reservarUnHorario = function(id, horario) {
     //Busca el objeto que posee el id dado
     var restaurant = this.buscarRestaurante(id);
@@ -35,9 +41,7 @@ Listado.prototype.obtenerUbicaciones = function() {
         ciudades.push(this.restaurantes[i].ubicacion);
     }
     //Se crea un nuevo array donde se van a agregar las ciudades pero sin repetirse
-    var ciudadesFiltradas = ciudades.filter(function(elem, index, self) {
-        return index === self.indexOf(elem);
-    });
+    var ciudadesFiltradas = filtrar(ciudades);
 
     return ciudadesFiltradas.sort();
 }
@@ -49,9 +53,7 @@ Listado.prototype.obtenerRubros = function() {
         rubros.push(this.restaurantes[i].rubro);
     }
 
-    var rubrosFiltrados = rubros.filter(function(elem, index, self) {
-        return index === self.indexOf(elem);
-    });
+    var rubrosFiltrados = filtrar(rubros);
 
     return rubrosFiltrados.sort();
 }
@@ -76,9 +78,7 @@ Listado.prototype.obtenerHorarios = function() {
     });
 
     //En este arreglo vamos a poner todos los horarios pero sin repetidos
-    var horariosFiltrados = horarios.filter(function(elem, index, self) {
-        return index === self.indexOf(elem);
-    });
+    var horariosFiltrados = filtrar(horarios);
 
     return horariosFiltrados.sort();
 }
