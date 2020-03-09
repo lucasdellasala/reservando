@@ -3,9 +3,7 @@ var Listado = function(restaurantes) {
 }
 
 function filtrar(arregloSinFiltrar) {
-    arregloSinFiltrar.filter(function(elem, index, self) {
-        return index === self.indexOf(elem);
-    })
+    return arregloSinFiltrar.filter((a, b) => arregloSinFiltrar.indexOf(a) === b)
 }
 
 Listado.prototype.reservarUnHorario = function(id, horario) {
@@ -42,6 +40,7 @@ Listado.prototype.obtenerUbicaciones = function() {
     }
     //Se crea un nuevo array donde se van a agregar las ciudades pero sin repetirse
     var ciudadesFiltradas = filtrar(ciudades);
+    console.log(ciudadesFiltradas);
 
     return ciudadesFiltradas.sort();
 }
@@ -54,6 +53,7 @@ Listado.prototype.obtenerRubros = function() {
     }
 
     var rubrosFiltrados = filtrar(rubros);
+    console.log(rubrosFiltrados);
 
     return rubrosFiltrados.sort();
 }
