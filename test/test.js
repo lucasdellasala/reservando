@@ -176,3 +176,25 @@ describe('Test de la función obtenerRestaurante', function() {
         expect("TAO Uptown").to.equal(restaurantesFiltrados[0].nombre);
     });    
 });
+
+//Test nueva funcionalidad
+describe('Test nueva funcionalidad', function() {
+    it("Calcula correctamente un precio base", function(){
+        // Inicializar variables que contienen los metodos a testear
+        var reserva1 = new Reserva (new Date(2018, 7, 24, 11, 00), 8, 350, "DES1");
+        // Ejecutar metodos que se quieren testear
+        var precioBase = reserva1.baseReserva();
+        // Verificar que el resultado devuelto por la funcion coincida con el resultado esperado
+        expect(2800).to.equal(precioBase);
+    });
+    it("Calcula correctamente un precio final", function(){
+        // Inicializar variables que contienen los metodos a testear
+        var reserva1 = new Reserva (new Date(2018, 7, 24, 11, 00), 8, 350, "DES1");
+        // Ejecutar metodos que se quieren testear
+        var precioFinal = reserva1.totalReserva();
+        // Verificar que el resultado devuelto por la funcion coincida con el resultado esperado
+        expect(2310).to.equal(precioFinal);
+    });
+});
+
+
