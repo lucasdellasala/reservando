@@ -122,14 +122,14 @@ describe('Test de la función buscarRestaurante(id)', function() {
         expect(restauranteId1.imagen).to.equal(restauranteId1Metodo.imagen);
         expect(restauranteId1.calificaciones.length).to.equal(restauranteId1Metodo.calificaciones.length);
     });
-    it("No ecuentra el restaurante con id 25", function(){
+    it("No encuentra el restaurante con id 25", function(){
         // Inicializar variables que contienen los metodos a testear
         // Ejecutar metodos que se quieren testear
         let restauranteId25Metodo = listado.buscarRestaurante(25);
         // Verificar que el resultado devuelto por la funcion coincida con el resultado esperado
         expect("No se ha encontrado ningún restaurant").to.equal(restauranteId25Metodo);
     });
-    it("No ecuentra el restaurante con id vacío", function(){
+    it("No encuentra el restaurante con id vacío", function(){
         // Inicializar variables que contienen los metodos a testear
         // Ejecutar metodos que se quieren testear
         let restauranteIdVacioMetodo = listado.buscarRestaurante();
