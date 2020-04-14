@@ -1,8 +1,12 @@
-var Reserva = function(horario, cantidadDePersonas, precioPorPersona, codigoDeDescuento){
-    this.horario = horario;
+var Reserva = function(date, cantidadDePersonas, precioPorPersona, codigoDeDescuento){
+    this.date = date;
     this.cantidadDePersonas = cantidadDePersonas;
     this.precioPorPersona = precioPorPersona;
     this.codigoDeDescuento = codigoDeDescuento;
+}
+
+Reserva.prototype.baseReserva = function (){
+    return this.cantidadDePersonas*this.precioPorPersona;
 }
 
 function descuentoPorCantidad (cantidadDePersonas, precioPorPersona){
@@ -19,10 +23,8 @@ function descuentoPorCantidad (cantidadDePersonas, precioPorPersona){
     
     return porcentual;
 }
-
 function descuentoPorCodigo (cantidadDePersonas, precioPorPersona, codigoDeDescuento) {
     var saldo = cantidadDePersonas * precioPorPersona;
-    console.log(saldo);
     switch (codigoDeDescuento) {
         case "DES15":
             descuentoPorCodigo = saldo*0.15;
@@ -34,10 +36,6 @@ function descuentoPorCodigo (cantidadDePersonas, precioPorPersona, codigoDeDescu
 
     return descuentoPorCodigo;
 }
-
-Reserva.prototype.baseReserva = function (){
-    return this.cantidadDePersonas*this.precioPorPersona;
-}
 Reserva.prototype.descuento = function (){
     var totalDescuentos = 0;
     var descuento1 = descuentoPorCantidad(this.cantidadDePersonas, this.precioPorPersona);
@@ -47,15 +45,44 @@ Reserva.prototype.descuento = function (){
 
     return totalDescuentos;
 }
+
+function adicionalPorHorario (date, cantidadDePersonas, precioPorPersona){
+    var horaReserva = date.getHours();
+    var porcentual = 0;
+    var saldo = cantidadDePersonas * precioPorPersona;
+
+    if ((horaReserva>=13&&horaReserva<=14) || (horaReserva>=20&&horaReserva<=21)){
+        porcentual = saldo*0.05;
+    }
+    return porcentual;
+}
+function adicionalPorFinde (date, cantidadDePersonas, precioPorPersona){
+    var dia = date.getDay();
+    var porcentual = 0;
+    var saldo = cantidadDePersonas * precioPorPersona;
+
+    if (dia===0||dia===5||dia===6){
+        porcentual = saldo*0.10;
+    }
+    
+    return porcentual;
+}
+Reserva.prototype.adicional = function (){
+    var totalAdicional = 0;
+    var adicional1 = adicionalPorHorario(this.date, this.cantidadDePersonas, this.precioPorPersona);
+    var adicional2 = adicionalPorFinde(this.date, this.cantidadDePersonas, this.precioPorPersona);
+    
+    totalAdicional = adicional1 + adicional2;
+ 
+    return totalAdicional;
+}
+
 Reserva.prototype.totalReserva = function (){
-    // var horaReserva = this.date.getHours();
-    // var diaReserva = this.date.getDay ();
     var saldo = this.baseReserva();
-    var adicionales = 0;
+    var adicionales = this.adicional();
+    var descuentos = this.descuento();
 
-    var totalDescuentos = this.descuento();
-
-    var precioFinal = saldo + adicionales - totalDescuentos;
+    var precioFinal = saldo + adicionales - descuentos;
 
     return precioFinal;
 };

@@ -193,7 +193,7 @@ describe('Test nueva funcionalidad', function() {
         // Ejecutar metodos que se quieren testear
         var precioFinal = reserva1.totalReserva();
         // Verificar que el resultado devuelto por la funcion coincida con el resultado esperado
-        expect(2310).to.equal(precioFinal);
+        expect(2450).to.equal(precioFinal);
     });
 });
 
